@@ -13,7 +13,7 @@ export default function WorkflowsPage() {
     <main className="page-shell page-stack">
       <section className="page-hero">
         <p className="eyebrow">Example workflows</p>
-        <h1 className="page-title">Three examples of where AI and automation can help.</h1>
+        <h1 className="page-title">Three workflow examples.</h1>
         <p className="page-intro">
           These are examples, not fixed packages. They show the kind of
           workflows Molyx can design once the right opportunity is clear.

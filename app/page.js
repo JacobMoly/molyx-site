@@ -37,7 +37,7 @@ export default function Home() {
         <section className="hero-section">
           <div className="hero-copy">
           <p className="eyebrow">AI agents and automations for UK small businesses</p>
-          <h1>Find the right automation opportunities in your business.</h1>
+          <h1>Automate the busywork.</h1>
           <p className="hero-text">
             Molyx Labs helps UK small businesses find, build, and run
             practical AI agents and automations that save time, cut admin, and
@@ -88,7 +88,7 @@ export default function Home() {
       <section className="section">
         <div className="section-heading">
           <p className="section-label">Why it matters</p>
-          <h2>Most business owners have heard about AI. Many still do not trust it.</h2>
+          <h2>AI is new. Trust is earned.</h2>
           <p>
             Fair enough. Most people have heard the hype, but not seen a clear
             case for where AI saves money, cuts admin, or improves operations.
@@ -103,7 +103,7 @@ export default function Home() {
       <section className="section">
         <div className="section-heading">
           <p className="section-label">What business owners care about</p>
-          <h2>The value has to be commercially clear.</h2>
+          <h2>The value must be clear.</h2>
         </div>
         <div className="faq-grid">
           <article className="faq-card">
@@ -131,7 +131,7 @@ export default function Home() {
       <section className="section">
         <div className="section-heading">
           <p className="section-label">What can be automated</p>
-          <h2>Examples of the kinds of workflows this process can uncover.</h2>
+          <h2>Example workflows.</h2>
           <p>
             These are example workflows, not fixed packages. They show the kind
             of systems Molyx can build once the right opportunity is clear.
@@ -169,7 +169,7 @@ export default function Home() {
         <div className="two-column">
           <div>
             <p className="section-label">ROI and outcomes</p>
-          <h2>What the right automation changes in practice.</h2>
+          <h2>What changes in practice.</h2>
           <p>
             The best workflows save time, improve consistency, and stop routine
             work from living in someone’s head.
@@ -188,7 +188,7 @@ export default function Home() {
       <section className="section" id="how-it-works">
         <div className="section-heading">
           <p className="section-label">How it works</p>
-          <h2>A clear path from discovery call to live automation.</h2>
+          <h2>A clear path.</h2>
         </div>
         <div className="process-grid">
           {processSteps.map((step, index) => (
@@ -204,7 +204,7 @@ export default function Home() {
       <section className="section">
         <div className="section-heading">
           <p className="section-label">Trust</p>
-          <h2>Trust matters more than clever language.</h2>
+          <h2>Trust comes first.</h2>
           <p>
             Business owners do not need a futuristic pitch. They need to know
             what would be automated, what it would save, and whether it is
@@ -221,7 +221,7 @@ export default function Home() {
       <section className="section">
         <div className="section-heading">
           <p className="section-label">Commercial model</p>
-          <h2>A one-time build fee followed by an ongoing retainer.</h2>
+          <h2>One-time build. Ongoing retainer.</h2>
           <p>
             Once the opportunity is clear, the build is delivered as a one-time
             project fee. After launch, support and improvement can move onto a
@@ -237,7 +237,7 @@ export default function Home() {
       <section className="section">
         <div className="section-heading">
           <p className="section-label">FAQ</p>
-          <h2>Common questions before a business decides whether this is worth exploring.</h2>
+          <h2>Common questions.</h2>
         </div>
         <div className="faq-grid">
           {faqs.slice(0, 4).map((item) => (
@@ -272,7 +272,17 @@ export default function Home() {
             <div className="booking-point">Google Meet</div>
             <div className="booking-point">No prep needed</div>
           </div>
-          <div className="cta-row booking-cta-row">
+        </div>
+        <div className="contact-card booking-card">
+          <p className="card-kicker">What the call covers</p>
+          <h3>Use the call to pressure-test the opportunity.</h3>
+          <ul className="booking-list">
+            <li>How the business works today</li>
+            <li>Where time is being lost</li>
+            <li>Which workflows are good automation candidates</li>
+            <li>Whether there is a real ROI case for building</li>
+          </ul>
+          <div className="booking-actions">
             <a
               className="button button-primary"
               href={calendlyUrl}
@@ -285,16 +295,6 @@ export default function Home() {
               Prefer email?
             </a>
           </div>
-        </div>
-        <div className="contact-card booking-card">
-          <p className="card-kicker">What the call covers</p>
-          <h3>Use the call to pressure-test the opportunity.</h3>
-          <ul className="booking-list">
-            <li>How the business works today</li>
-            <li>Where time is being lost</li>
-            <li>Which workflows are good automation candidates</li>
-            <li>Whether there is a real ROI case for building</li>
-          </ul>
           <p className="booking-small">
             If there is a strong fit, the next step is a scoped design and
             build plan. If not, you will still leave with a clearer picture of

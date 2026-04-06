@@ -11,7 +11,7 @@ export default function FaqPage() {
     <main className="page-shell page-stack">
       <section className="page-hero">
         <p className="eyebrow">Frequently asked questions</p>
-        <h1 className="page-title">What businesses ask before they automate.</h1>
+        <h1 className="page-title">Before you automate.</h1>
         <p className="page-intro">
           Straight answers on where automation helps, where AI is useful, and
           how a small business should think about implementation.

@@ -584,6 +584,22 @@ p {
   margin-top: 8px;
 }
 
+.booking-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 8px 0 6px;
+}
+
+.booking-card .button-primary {
+  box-shadow: 0 12px 28px rgba(49, 94, 87, 0.2);
+}
+
+.booking-card .button-secondary {
+  border-color: rgba(49, 94, 87, 0.18);
+  background: rgba(255, 255, 252, 0.96);
+}
+
 .booking-list {
   margin: 0;
   padding-left: 18px;

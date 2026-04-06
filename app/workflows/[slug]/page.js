@@ -79,7 +79,7 @@ export default async function WorkflowDetailPage({ params }) {
 
       <section className="section-accent detail-copy">
         <p className="section-label">Why this matters</p>
-        <h2 className="card-title-large">How this kind of workflow helps</h2>
+        <h2 className="card-title-large">Why it helps</h2>
         <p>{page.detail}</p>
       </section>
 
