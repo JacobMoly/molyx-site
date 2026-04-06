@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Molyx Labs Mockup</title>
+    <style>
+      :root {
+        --bg: #f4efe7;
+        --surface: #fffaf4;
+        --text: #1e1d1a;
+        --muted: #5d5a54;
+        --line: #d8cdbd;
+        --accent: #1f5c4a;
+        --accent-2: #c96d42;
+        --accent-soft: #e5f0eb;
+        --shadow: 0 18px 40px rgba(34, 28, 19, 0.08);
+        --radius: 20px;
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(201, 109, 66, 0.15), transparent 32%),
+          linear-gradient(180deg, #f8f2e8 0%, var(--bg) 58%, #efe5d8 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(10px);
+        background: rgba(244, 239, 231, 0.84);
+        border-bottom: 1px solid rgba(216, 205, 189, 0.8);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 18px 0;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        font-size: 0.95rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 20px;
+        border-radius: 999px;
+        font-family: Arial, sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        border: 1px solid transparent;
+      }
+
+      .button.primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--text);
+        border-color: var(--line);
+      }
+
+      .hero {
+        padding: 72px 0 48px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(31, 92, 74, 0.08);
+        color: var(--accent);
+        font-family: Arial, sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 34px;
+        align-items: center;
+        margin-top: 22px;
+      }
+
+      h1, h2, h3 {
+        margin: 0 0 14px;
+        line-height: 1.02;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 6vw, 5.8rem);
+        max-width: 11ch;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 3.3rem);
+      }
+
+      h3 {
+        font-size: 1.35rem;
+      }
+
+      p {
+        margin: 0 0 16px;
+        line-height: 1.65;
+        color: var(--muted);
+        font-size: 1.06rem;
+      }
+
+      .hero-copy p {
+        max-width: 58ch;
+      }
+
+      .button-row,
+      .nav-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .hero-card {
+        background: linear-gradient(180deg, rgba(255, 250, 244, 0.95), rgba(241, 233, 220, 0.92));
+        border: 1px solid rgba(216, 205, 189, 0.9);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card .metric {
+        font-family: Arial, sans-serif;
+        font-size: 0.9rem;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .hero-card .big {
+        font-size: 3.2rem;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+
+      .trust-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin: 26px 0 0;
+      }
+
+      .trust-item {
+        padding: 16px 18px;
+        background: rgba(255, 250, 244, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        font-family: Arial, sans-serif;
+        font-size: 0.93rem;
+        color: var(--muted);
+      }
+
+      section.block {
+        padding: 34px 0;
+      }
+
+      .section-head {
+        max-width: 760px;
+        margin-bottom: 24px;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .label {
+        font-family: Arial, sans-serif;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent-2);
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .process {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .process .card {
+        background: rgba(31, 92, 74, 0.05);
+      }
+
+      .cta {
+        margin: 42px 0 70px;
+        padding: 38px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, #1f5c4a, #2d7761);
+        color: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .cta p {
+        color: rgba(255, 255, 255, 0.86);
+        max-width: 54ch;
+      }
+
+      .cta .button.primary {
+        background: #fff;
+        color: var(--accent);
+      }
+
+      .cta .button.secondary {
+        border-color: rgba(255, 255, 255, 0.35);
+        color: #fff;
+      }
+
+      footer {
+        padding: 26px 0 42px;
+        border-top: 1px solid rgba(216, 205, 189, 0.85);
+        font-family: Arial, sans-serif;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 24px;
+      }
+
+      .small {
+        font-family: Arial, sans-serif;
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .split,
+        .footer-grid,
+        .cards,
+        .process,
+        .trust-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container nav">
+        <div class="brand">Molyx Labs</div>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#letting-agencies">Letting Agencies</a>
+          <a href="#workflows">Workflows</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-actions">
+          <a class="button primary" href="#contact">Book Audit</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <section class="hero" id="home">
+        <span class="eyebrow">London-based AI automation for UK property businesses</span>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>AI automation for UK letting agencies</h1>
+            <p>We help letting agencies cut the admin behind maintenance requests, tenant onboarding, landlord updates, compliance reminders, and other repetitive back-office work.</p>
+            <div class="button-row">
+              <a class="button primary" href="#contact">Book a Free Automation Audit</a>
+              <a class="button secondary" href="#workflows">See Example Workflows</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="metric">Typical result from one strong workflow</div>
+            <div class="big">5-10 hrs</div>
+            <p>saved per week by removing manual back-and-forth, contractor chasing, status updates, and repeated handoffs.</p>
+            <p class="small"><strong>Best-fit clients:</strong> UK letting agencies with small teams, growing portfolios, and too much ops work living across inboxes and spreadsheets.</p>
+          </div>
+        </div>
+        <div class="trust-strip">
+          <div class="trust-item">Built in London</div>
+          <div class="trust-item">Founder-led delivery</div>
+          <div class="trust-item">Practical n8n + AI systems</div>
+          <div class="trust-item">Designed for small UK teams</div>
+        </div>
+      </section>
+
+      <section class="block" id="letting-agencies">
+        <div class="section-head">
+          <div class="label">Problem</div>
+          <h2>Your team should not be spending hours every week chasing the same tasks</h2>
+          <p>Most letting agencies already have the hard part in place: properties, tenants, landlords, contractors, and the systems that keep the business moving. What slows everything down is the admin between those moving parts.</p>
+          <p>Maintenance issues get passed around manually. Contractors need chasing. Landlords want updates. Compliance dates have to be remembered. Invoices need logging. Information lives across inboxes, spreadsheets, and property systems. That is exactly the kind of work Molyx automates.</p>
+        </div>
+      </section>
+
+      <section class="block" id="workflows">
+        <div class="section-head">
+          <div class="label">Workflows</div>
+          <h2>Workflows we can automate</h2>
+          <p>These are the kinds of systems you should show on the finished site. Each one speaks directly to a real operational pain point in letting agencies.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="label">01</div>
+            <h3>Maintenance Coordination</h3>
+            <p>Tenant reports an issue, the right contractor is notified, progress is tracked, invoices are captured, and the landlord gets updated automatically.</p>
+          </article>
+          <article class="card">
+            <div class="label">02</div>
+            <h3>Tenant Onboarding</h3>
+            <p>Move-in documents, ID requests, reminders, check-in tasks, and internal handoffs all run from one clear workflow.</p>
+          </article>
+          <article class="card">
+            <div class="label">03</div>
+            <h3>Compliance Reminders</h3>
+            <p>Gas, EPC, electrical, renewal, and other deadlines trigger reminders and escalations before they become problems.</p>
+          </article>
+          <article class="card">
+            <div class="label">04</div>
+            <h3>Landlord Reporting</h3>
+            <p>Pull information from the tools you already use and send clear updates without someone manually assembling them every time.</p>
+          </article>
+          <article class="card">
+            <div class="label">05</div>
+            <h3>Lead Response and Follow-up</h3>
+            <p>New landlord and tenant enquiries can be routed, qualified, and followed up faster so opportunities do not sit untouched.</p>
+          </article>
+          <article class="card">
+            <div class="label">06</div>
+            <h3>Invoice and Chasing</h3>
+            <p>Automate invoice creation, reminders, handoffs, and internal visibility so payment-related admin stops eating team time.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="block" id="about">
+        <div class="split">
+          <div class="card">
+            <div class="label">Why Molyx</div>
+            <h2>Built for practical operations, not AI theatre</h2>
+            <p>Molyx Labs builds automation systems that fit the way your business already works. The goal is not a rip-and-replace project. The goal is to remove repetitive work without adding more complexity.</p>
+            <p>You should use this section to explain why a founder-led specialist is a better fit than a generic no-code agency.</p>
+          </div>
+          <div class="card" style="background: var(--accent-soft);">
+            <div class="label">Founder</div>
+            <h3>Work directly with the person building the system</h3>
+            <p>Molyx is led by a London-based builder with hands-on experience developing production AI agents in fintech. That means technical implementation designed to be reliable, useful, and maintainable.</p>
+            <p class="small"><strong>Use a real founder photo here.</strong> This will do more for trust than adding more design polish.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="section-head">
+          <div class="label">Process</div>
+          <h2>How it works</h2>
+          <p>This should replace the broad process copy currently on the site. Keep it concrete and operational.</p>
+        </div>
+        <div class="process">
+          <article class="card">
+            <div class="label">1. Audit</div>
+            <p>Review how the workflow currently runs, where time is being lost, and which manual steps should be automated first.</p>
+          </article>
+          <article class="card">
+            <div class="label">2. Design</div>
+            <p>Get a clear plan covering what will be built, what it connects to, expected time savings, and how rollout will work.</p>
+          </article>
+          <article class="card">
+            <div class="label">3. Build</div>
+            <p>The workflow is built and tested against real scenarios so you can see it working end-to-end before launch.</p>
+          </article>
+          <article class="card">
+            <div class="label">4. Support</div>
+            <p>Once live, the system is monitored, improved, and kept working as your business changes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="split">
+          <div class="card">
+            <div class="label">Proof</div>
+            <h2>What this should save your team</h2>
+            <p>For many small agencies, one good workflow can save 5 to 10 hours of admin each week. The benefit is not just time saved. It is faster response times, fewer missed steps, and less dependence on one person remembering what happens next.</p>
+          </div>
+          <div class="card">
+            <div class="label">Case Study Placeholder</div>
+            <h3>Pilot case study coming soon</h3>
+            <p>Until you have a live client result, use this space for an example workflow breakdown and a realistic expected outcome.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div class="label" style="color: #d7f0e6;">Contact</div>
+        <h2>Book a free automation audit</h2>
+        <p>If your agency has a workflow that feels messy, repetitive, or too dependent on manual follow-up, this is the clearest next step. On the real site, this section should send people to your contact form or booking link.</p>
+        <div class="button-row">
+          <a class="button primary" href="#">Book a Free Automation Audit</a>
+          <a class="button secondary" href="mailto:contact@molyxlabs.com">contact@molyxlabs.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-grid">
+        <div>
+          <div class="brand">Molyx Labs</div>
+          <p class="small">London, England. Founder-led automation systems for UK letting agencies and other service businesses with high admin load.</p>
+        </div>
+        <div>
+          <p class="small"><strong>Recommended nav:</strong> Home, Letting Agencies, Workflows, About, Contact</p>
+          <p class="small"><strong>Remove:</strong> default social profiles, dead buttons, cart icon, vague agency filler copy.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<svg width="760" height="760" viewBox="0 0 760 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="760" height="760" rx="48" fill="url(#bg)"/>
+  <g opacity="0.9">
+    <path d="M-60 220C120 120 260 120 420 220C580 320 640 460 820 520" stroke="url(#line1)" stroke-width="120" stroke-linecap="round"/>
+    <path d="M-20 420C140 320 300 320 460 420C620 520 700 640 840 700" stroke="url(#line2)" stroke-width="120" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#blur)">
+    <circle cx="230" cy="250" r="170" fill="url(#orb1)"/>
+    <circle cx="520" cy="260" r="150" fill="url(#orb2)"/>
+    <circle cx="360" cy="520" r="210" fill="url(#orb3)"/>
+  </g>
+  <rect x="140" y="140" width="480" height="480" rx="36" fill="url(#glass)" stroke="rgba(255,255,255,0.35)"/>
+  <rect x="180" y="200" width="220" height="20" rx="10" fill="rgba(255,255,255,0.8)"/>
+  <rect x="180" y="240" width="320" height="20" rx="10" fill="rgba(255,255,255,0.6)"/>
+  <rect x="180" y="280" width="260" height="20" rx="10" fill="rgba(255,255,255,0.5)"/>
+  <rect x="180" y="360" width="360" height="24" rx="12" fill="rgba(255,255,255,0.75)"/>
+  <rect x="180" y="410" width="300" height="18" rx="9" fill="rgba(255,255,255,0.55)"/>
+  <rect x="180" y="450" width="220" height="18" rx="9" fill="rgba(255,255,255,0.45)"/>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="700" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F3EE"/>
+      <stop offset="0.5" stop-color="#EDE8DF"/>
+      <stop offset="1" stop-color="#ECE6DD"/>
+    </linearGradient>
+    <linearGradient id="line1" x1="-60" y1="220" x2="820" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D2E4DE"/>
+      <stop offset="1" stop-color="#9EC0B6"/>
+    </linearGradient>
+    <linearGradient id="line2" x1="-20" y1="420" x2="840" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F0D9C6"/>
+      <stop offset="1" stop-color="#D8B5A0"/>
+    </linearGradient>
+    <radialGradient id="orb1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(230 250) rotate(90) scale(170)">
+      <stop stop-color="#9EC0B6"/>
+      <stop offset="1" stop-color="#9EC0B6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(520 260) rotate(90) scale(150)">
+      <stop stop-color="#E0B69D"/>
+      <stop offset="1" stop-color="#E0B69D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 520) rotate(90) scale(210)">
+      <stop stop-color="#B7CBC5"/>
+      <stop offset="1" stop-color="#B7CBC5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="140" y1="140" x2="620" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(255,255,255,0.72)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.4)"/>
+    </linearGradient>
+    <filter id="blur" x="-40" y="0" width="840" height="840" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+</svg>
