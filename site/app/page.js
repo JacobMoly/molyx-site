@@ -1,258 +1,320 @@
-import Image from "next/image";
 import Link from "next/link";
-import { workflowPages } from "../lib/site-data";
-import PageHero from "../components/page-hero";
+import Reveal from "../components/reveal";
+import FAQ from "../components/faq";
+import HeroGraphic from "../components/hero-graphic";
 
 const calendlyUrl = "https://calendly.com/jacob-molyxlabs/30min";
+const tight = "var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif";
+
+function Ic({ path, size = 20 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d={path} />
+    </svg>
+  );
+}
+
+const stats = [
+  { value: "10+", label: "hours saved per week, per workflow" },
+  { value: "2 wks", label: "from discovery to first automation live" },
+  { value: "100%", label: "built on tools you already use" },
+  { value: "UK", label: "based, responsive, plain-English support" },
+];
 
 const problems = [
   {
-    title: "Repetitive admin",
-    description:
-      "Hours every week spent on tasks that follow the same pattern every time — data entry, status updates, chasing approvals.",
+    iconPath: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z",
+    title: "Copy-paste between apps",
+    body: "Moving data from email to spreadsheet to CRM by hand — every day, in every team.",
   },
   {
-    title: "Slow lead response",
-    description:
-      "Enquiries sitting in inboxes. No clear owner. First response taking hours or days when it should take minutes.",
+    iconPath: "M12 3a9 9 0 1 0 0 18A9 9 0 0 0 12 3zM12 7v5l3 2",
+    title: "Slow, manual responses",
+    body: "Enquiries, quotes and follow-ups sitting in an inbox while customers wait and leads go cold.",
   },
   {
-    title: "Manual handoffs",
-    description:
-      "Work falling through the gaps between people and tools. No reliable way to know what's been done and what hasn't.",
+    iconPath: "M3 3v18h18M7 14l4-4 3 3 5-6",
+    title: "No time for the real work",
+    body: "Skilled people stuck on admin instead of the work that actually grows the business.",
   },
 ];
 
-const processSteps = [
+const services = [
   {
-    number: "01",
-    title: "Discovery call",
-    description:
-      "We learn how the business runs, where time is being lost, and which problems are worth exploring.",
+    iconPath: "M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3",
+    hasCircle: true,
+    title: "Workflow automation",
+    body: "Connect your apps so data flows on its own — no more copy-paste, no more dropped handovers between tools.",
+    tags: ["Zapier", "Make", "Integrations"],
   },
   {
-    number: "02",
-    title: "Opportunity audit",
-    description:
-      "We identify the workflows where automation or AI could save time, reduce cost, or improve reliability.",
+    iconPath: "M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM9 9h.01M15 9h.01M9 14c.8 1 2.2 1 3 0",
+    title: "AI agents & assistants",
+    body: "Custom assistants that handle enquiries, draft replies, triage tickets and answer questions from your own documents.",
+    tags: ["OpenAI", "Chat agents", "RAG"],
   },
   {
-    number: "03",
-    title: "Design and build",
-    description:
-      "Once the opportunity is clear, we design and build the right automation around your current setup.",
+    iconPath: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+    title: "Lead & enquiry handling",
+    body: "Capture, qualify and route every enquiry instantly, with follow-ups that fire automatically so nothing slips.",
+    tags: ["CRM", "Forms", "Follow-up"],
   },
   {
-    number: "04",
-    title: "Support and retainer",
-    description:
-      "After launch, we maintain, improve, and expand the system through an ongoing monthly retainer.",
+    iconPath: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M9 13l2 2 4-4",
+    title: "Reporting & admin",
+    body: "Automated reports, invoicing nudges and data entry — the recurring admin that quietly eats your week.",
+    tags: ["Xero", "Sheets", "Scheduling"],
   },
+];
+
+const steps = [
+  { num: "01", title: "Discovery", body: "A free call to understand your business and surface where time is actually being lost." },
+  { num: "02", title: "Scope", body: "We pinpoint the highest-impact problems and propose a clear, costed plan — no jargon." },
+  { num: "03", title: "Build", body: "We build and test the automation on your real tools, delivered in stages you can see." },
+  { num: "04", title: "Support", body: "We hand over, train your team and stay on call to refine as your needs change." },
+];
+
+const whys = [
+  { title: "We start with your problem", body: "Not a product demo. Every build begins from a real bottleneck in your business." },
+  { title: "Pays for itself", body: "We only recommend automation when the time or money saved clearly outweighs the cost." },
+  { title: "No lock-in", body: "Built on platforms you own and understand, so you're never trapped or in the dark." },
+  { title: "UK-based & responsive", body: "Talk to the people who built it — not a ticket queue in another timezone." },
 ];
 
 export default function Home() {
   return (
-    <main>
-      {/* Hero */}
-      <PageHero className="pt-20 pb-20 md:pt-28 md:pb-28 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 mb-8 tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
-              AI automation for UK small businesses
-            </div>
+    <main style={{ color: "#16161a", background: "#fff", overflowX: "hidden" }}>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-6">
-              Automate the busywork.
-            </h1>
-
-            <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mb-3">
-              Molyx Labs helps UK small businesses find, build, and run practical AI agents and automations that save time, cut admin, and improve operations.
-            </p>
-            <p className="text-lg text-gray-500 leading-relaxed max-w-2xl mb-10">
-              It starts with a discovery call. We find the bottlenecks, identify where automation will help, and only build when there is a clear business case.
-            </p>
-
-            <div className="flex flex-wrap gap-4 mb-10">
-              <a
-                href={calendlyUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
-              >
-                Book a discovery call
-              </a>
-              <Link
-                href="/services"
-                className="inline-flex items-center border border-gray-300 text-gray-700 font-semibold px-6 py-3 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors"
-              >
-                See our services
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {["UK small businesses", "Discovery-led", "Founder-run", "No rip-and-replace"].map((tag) => (
-                <span
-                  key={tag}
-                  className="text-sm text-gray-500 border border-gray-200 rounded-full px-3 py-1.5"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+      {/* HERO */}
+      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "96px 32px 80px", position: "relative" }}>
+        <HeroGraphic />
+        <div style={{ position: "relative", maxWidth: 720 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "#f4f4f8", border: "1px solid #ececf2", borderRadius: 100, padding: "7px 15px 7px 12px", marginBottom: 30 }}>
+            <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 0 3px rgba(34,197,94,0.18)", flexShrink: 0 }} />
+            <span style={{ fontSize: 13, fontWeight: 500, color: "#54545e" }}>AI automation studio · United Kingdom</span>
           </div>
-        </div>
-      </PageHero>
-
-      {/* Problem section */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-14">
-            <p className="text-sm font-semibold text-indigo-600 tracking-widest uppercase mb-4">
-              The problem
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
-              Where the time goes.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {problems.map((item) => (
-              <div
-                key={item.title}
-                className="bg-gray-50 border border-gray-200 rounded-2xl p-8"
-              >
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="py-20 md:py-28 bg-gray-50 border-y border-gray-100" id="how-it-works">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-14">
-            <p className="text-sm font-semibold text-indigo-600 tracking-widest uppercase mb-4">
-              The process
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
-              A clear path.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((step) => (
-              <div key={step.number} className="bg-white border border-gray-200 rounded-2xl p-8">
-                <p className="text-4xl font-black text-gray-200 mb-4 leading-none">
-                  {step.number}
-                </p>
-                <h3 className="text-base font-semibold text-gray-900 mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Workflow examples */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-14">
-            <p className="text-sm font-semibold text-indigo-600 tracking-widest uppercase mb-4">
-              What we build
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">
-              Example workflows.
-            </h2>
-            <p className="text-gray-600 max-w-xl leading-relaxed">
-              These are examples, not fixed packages. They show the kind of systems Molyx can build once the right opportunity is clear.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {workflowPages.map((card) => (
-              <article
-                key={card.slug}
-                className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-300 hover:shadow-sm transition-all"
-              >
-                <div className="bg-gray-50 border-b border-gray-100 overflow-hidden">
-                  <Image
-                    alt={card.name}
-                    src={card.image}
-                    width={420}
-                    height={220}
-                    className="w-full h-auto"
-                  />
-                </div>
-                <div className="p-6">
-                  <p className="text-xs font-semibold text-indigo-600 tracking-widest uppercase mb-3">
-                    {card.eyebrow}
-                  </p>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    {card.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-5">
-                    {card.summary}
-                  </p>
-                  <Link
-                    href={`/workflows/${card.slug}`}
-                    className="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors inline-flex items-center gap-1.5"
-                  >
-                    View workflow
-                    <span>→</span>
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/workflows"
-              className="border border-gray-300 text-gray-700 font-semibold px-6 py-3 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors text-sm"
-            >
-              Browse all examples
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA banner */}
-      <section className="py-20 md:py-28 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
-            Ready to stop wasting hours on admin?
-          </h2>
-          <p className="text-gray-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Book a free discovery call. We will look at your workflows, find the bottlenecks, and only recommend building if there is a clear business case.
+          <h1 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(42px,5.5vw,62px)", lineHeight: 1.04, letterSpacing: "-0.035em", margin: "0 0 24px", color: "#0e0e14" }}>
+            We find the work that's slowing you down — then automate it.
+          </h1>
+          <p style={{ fontSize: 19, lineHeight: 1.55, color: "#54545e", margin: "0 0 36px", maxWidth: 560, fontWeight: 450 }}>
+            Molyx Labs builds custom automations, workflows, and AI agents for UK small and medium businesses. We start with a free discovery call to find the real bottlenecks — then build solutions that pay for themselves.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
             <a
               href={calendlyUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+              style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "#16161a", color: "#fff", fontFamily: tight, fontSize: 16, fontWeight: 600, padding: "15px 26px", borderRadius: 11, textDecoration: "none", letterSpacing: "-0.01em" }}
             >
-              Book a discovery call
+              Book a free discovery call
+              <span style={{ fontSize: 18, lineHeight: 1 }}>→</span>
             </a>
-            <Link
-              href="/contact"
-              className="inline-flex items-center border border-gray-700 text-gray-300 font-semibold px-6 py-3 rounded-lg hover:border-gray-500 hover:text-white transition-colors"
+            <a
+              href="#how"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#16161a", fontSize: 16, fontWeight: 600, padding: "15px 20px", borderRadius: 11, textDecoration: "none", border: "1px solid #e2e2ea" }}
             >
-              Send us a message
-            </Link>
+              See how it works
+            </a>
+          </div>
+          <div style={{ marginTop: 44, display: "flex", alignItems: "center", gap: 26, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 13, color: "#9494a0", fontWeight: 500 }}>Built on the tools you already trust</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 22, color: "#b4b4be", fontWeight: 600, fontSize: 14.5, fontFamily: tight }}>
+              {["Zapier", "Make", "OpenAI", "HubSpot", "Xero"].map((t) => <span key={t}>{t}</span>)}
+            </div>
           </div>
         </div>
+      </section>
+
+      {/* STATS STRIP */}
+      <section style={{ borderTop: "1px solid #ededf2", borderBottom: "1px solid #ededf2", background: "#fafafb" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "38px 32px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }}>
+          {stats.map((s, i) => (
+            <Reveal key={s.value} delay={i * 90} style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+              <span style={{ fontFamily: tight, fontWeight: 700, fontSize: 38, letterSpacing: "-0.03em", color: "#0e0e14" }}>{s.value}</span>
+              <span style={{ fontSize: 14, color: "#6a6a74", lineHeight: 1.4 }}>{s.label}</span>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* THE PROBLEM */}
+      <section id="how" style={{ maxWidth: 1180, margin: "0 auto", padding: "100px 32px 30px" }}>
+        <div style={{ maxWidth: 600, marginBottom: 56 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>The problem</span>
+          <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(28px,4vw,40px)", lineHeight: 1.1, letterSpacing: "-0.03em", margin: "14px 0 0", color: "#0e0e14" }}>
+            Your team is doing work that software should be doing.
+          </h2>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 22 }}>
+          {problems.map((p, i) => (
+            <Reveal key={p.title} delay={i * 90} style={{ background: "#fff", border: "1px solid #ececf2", borderRadius: 16, padding: 28 }}>
+              <div style={{ width: 42, height: 42, borderRadius: 11, background: "linear-gradient(135deg,#eef0ff,#f4f4f8)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18, color: "#6366f1" }}>
+                <Ic path={p.iconPath} />
+              </div>
+              <h3 style={{ fontFamily: tight, fontWeight: 600, fontSize: 18, letterSpacing: "-0.01em", margin: "0 0 8px", color: "#16161a" }}>{p.title}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.55, color: "#6a6a74", margin: 0 }}>{p.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" style={{ maxWidth: 1180, margin: "0 auto", padding: "90px 32px 30px" }}>
+        <div style={{ maxWidth: 600, marginBottom: 56 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>What we build</span>
+          <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(28px,4vw,40px)", lineHeight: 1.1, letterSpacing: "-0.03em", margin: "14px 0 0", color: "#0e0e14" }}>
+            Practical solutions, built around how you actually work.
+          </h2>
+          <Link href="/examples" style={{ display: "inline-flex", alignItems: "center", gap: 7, marginTop: 16, color: "#6366f1", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
+            See real pain-point → agent → benefit examples <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
+          </Link>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
+          {services.map((sv, i) => (
+            <Reveal key={sv.title} delay={i * 90} style={{ background: "#fff", border: "1px solid #ececf2", borderRadius: 18, padding: 34, display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                <div style={{ width: 46, height: 46, borderRadius: 12, background: "linear-gradient(135deg,#16161a,#2f2f42)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", flexShrink: 0 }}>
+                  <Ic path={sv.iconPath} />
+                </div>
+                <h3 style={{ fontFamily: tight, fontWeight: 700, fontSize: 21, letterSpacing: "-0.02em", margin: 0, color: "#0e0e14" }}>{sv.title}</h3>
+              </div>
+              <p style={{ fontSize: 15.5, lineHeight: 1.6, color: "#6a6a74", margin: 0 }}>{sv.body}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {sv.tags.map((t) => (
+                  <span key={t} style={{ fontSize: 12.5, fontWeight: 500, color: "#54545e", background: "#f4f4f8", border: "1px solid #ececf2", borderRadius: 7, padding: "5px 10px" }}>{t}</span>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section id="process" style={{ background: "#0e0e14", marginTop: 100 }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "100px 32px" }}>
+          <div style={{ maxWidth: 600, marginBottom: 60 }}>
+            <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#a5a5f5" }}>Our process</span>
+            <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(28px,4vw,40px)", lineHeight: 1.1, letterSpacing: "-0.03em", margin: "14px 0 16px", color: "#fff" }}>
+              Problems first. Software second.
+            </h2>
+            <p style={{ fontSize: 17, lineHeight: 1.55, color: "#9a9aa8", margin: 0 }}>
+              We don't sell you a tool and hope it fits. We learn your business, then build only what moves the needle.
+            </p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 0 }}>
+            {steps.map((st, i) => (
+              <Reveal key={st.num} delay={i * 90} style={{ padding: "0 24px 0", borderLeft: "1px solid #26263a", paddingLeft: 24 }}>
+                <span style={{ fontFamily: tight, fontWeight: 700, fontSize: 14, color: "#6366f1", letterSpacing: "0.04em" }}>{st.num}</span>
+                <h3 style={{ fontFamily: tight, fontWeight: 600, fontSize: 19, letterSpacing: "-0.01em", margin: "14px 0 9px", color: "#fff" }}>{st.title}</h3>
+                <p style={{ fontSize: 14.5, lineHeight: 1.55, color: "#8a8a98", margin: 0 }}>{st.body}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY MOLYX + TESTIMONIAL */}
+      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "100px 32px 30px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+          <div>
+            <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>Why Molyx</span>
+            <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(26px,3.5vw,38px)", lineHeight: 1.12, letterSpacing: "-0.03em", margin: "14px 0 22px", color: "#0e0e14" }}>
+              A technical partner that speaks plain English.
+            </h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              {whys.map((w, i) => (
+                <Reveal key={w.title} delay={i * 80} translateY={20} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                  <span style={{ flexShrink: 0, width: 24, height: 24, borderRadius: "50%", background: "#eef0ff", color: "#6366f1", display: "flex", alignItems: "center", justifyContent: "center", marginTop: 2 }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                      <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 style={{ fontFamily: tight, fontWeight: 600, fontSize: 17, margin: "0 0 4px", color: "#16161a" }}>{w.title}</h3>
+                    <p style={{ fontSize: 15, lineHeight: 1.55, color: "#6a6a74", margin: 0 }}>{w.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <Reveal style={{ background: "#fafafb", border: "1px solid #ececf2", borderRadius: 20, padding: 38 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 22 }}>
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24">
+                  <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
+                </svg>
+              ))}
+            </div>
+            <p style={{ fontFamily: tight, fontSize: 22, lineHeight: 1.4, letterSpacing: "-0.02em", color: "#16161a", margin: "0 0 26px", fontWeight: 500 }}>
+              "They didn't try to sell us AI. They sat with our team for an afternoon, found the three jobs eating our week, and quietly automated them. We got those hours back."
+            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+              <div style={{ width: 44, height: 44, borderRadius: "50%", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: tight, fontWeight: 700, fontSize: 16, flexShrink: 0 }}>
+                JM
+              </div>
+              <div>
+                <div style={{ fontWeight: 600, fontSize: 15, color: "#16161a" }}>Operations Lead</div>
+                <div style={{ fontSize: 13.5, color: "#9494a0" }}>Professional services firm · Manchester</div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "90px 32px 30px" }}>
+        <Reveal style={{ background: "#fafafb", border: "1px solid #ececf2", borderRadius: 22, padding: 48 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>Who's behind it</span>
+          <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: 30, lineHeight: 1.2, letterSpacing: "-0.02em", margin: "12px 0 14px", color: "#0e0e14", maxWidth: 560 }}>
+            Built by people who've done this work, not just sold it.
+          </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.6, color: "#6a6a74", margin: 0, maxWidth: 620 }}>
+            Molyx Labs is a small, UK-based team focused on one thing: finding the manual work slowing a business down and quietly making it disappear. No account managers, no handoffs — the people on your discovery call are the people who build your automation.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" style={{ maxWidth: 820, margin: "0 auto", padding: "100px 32px 30px" }}>
+        <div style={{ textAlign: "center", marginBottom: 50 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>FAQ</span>
+          <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(28px,4vw,40px)", lineHeight: 1.1, letterSpacing: "-0.03em", margin: "14px 0 0", color: "#0e0e14" }}>
+            Questions, answered.
+          </h2>
+        </div>
+        <FAQ />
+      </section>
+
+      {/* CTA */}
+      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "90px 32px 110px" }}>
+        <Reveal translateY={28} duration={800} style={{ background: "#0e0e14", borderRadius: 28, padding: "80px 56px", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: -120, right: -80, width: 420, height: 420, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.35), transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "relative", maxWidth: 620 }}>
+            <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(30px,4vw,46px)", lineHeight: 1.08, letterSpacing: "-0.035em", margin: "0 0 20px", color: "#fff" }}>
+              Ready to see what you could automate?
+            </h2>
+            <p style={{ fontSize: 18, lineHeight: 1.55, color: "#aeaebc", margin: "0 0 36px" }}>
+              Book a free 30-minute discovery call. No pitch, no jargon — just a clear look at where automation could save your team time and money.
+            </p>
+            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
+              <a
+                href={calendlyUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0e0e14", fontFamily: tight, fontSize: 16, fontWeight: 700, padding: "16px 28px", borderRadius: 12, textDecoration: "none", letterSpacing: "-0.01em" }}
+              >
+                Book your discovery call <span style={{ fontSize: 18, lineHeight: 1 }}>→</span>
+              </a>
+              <a
+                href="mailto:hello@molyxlabs.co.uk"
+                style={{ display: "inline-flex", alignItems: "center", gap: 9, color: "#fff", fontSize: 16, fontWeight: 600, padding: "16px 22px", borderRadius: 12, textDecoration: "none", border: "1px solid #2e2e42" }}
+              >
+                hello@molyxlabs.co.uk
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </main>
   );
