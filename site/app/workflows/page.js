@@ -1,69 +1,68 @@
-import Image from "next/image";
 import Link from "next/link";
+import PageCta from "../../components/page-cta";
 import { workflowPages } from "../../lib/site-data";
-import PageHero from "../../components/page-hero";
 
 export const metadata = {
-  title: "Workflow Examples | Molyx Labs",
-  description:
-    "Explore three AI workflow examples — lead capture, onboarding, and reporting — that show how small businesses can reduce admin and improve operations.",
+  title: "Example AI Workflows | Molyx Labs",
+  description: "Explore practical AI agents and workflow automations for lead handling, onboarding, operations, reporting, and recurring admin.",
 };
 
 export default function WorkflowsPage() {
   return (
-    <main>
-      <PageHero className="pt-20 pb-20 md:pt-28 md:pb-24 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold text-indigo-600 tracking-widest uppercase mb-6">
-              Examples
-            </p>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.05] mb-6">
-              Workflow examples.
-            </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              These are examples, not fixed packages. They show the kind of systems Molyx can design once the right opportunity is clear.
-            </p>
-          </div>
+    <main className="inner-page">
+      <section className="inner-hero shell-inner">
+        <div className="inner-hero-grid" aria-hidden="true" />
+        <div className="inner-hero-copy">
+          <p className="eyebrow"><span /> Example systems</p>
+          <h1>Systems for the work<br /><em>between the work.</em></h1>
+          <p>Automation is most useful in the gaps: the handoffs, follow-ups, updates, and recurring tasks that keep stealing attention from your team.</p>
         </div>
-      </PageHero>
+        <div className="workflow-map" aria-hidden="true">
+          <div className="map-label">Live workflow / MLX</div>
+          <div className="map-node map-node-a"><i /> Input</div>
+          <div className="map-node map-node-b"><i /> Understand</div>
+          <div className="map-node map-node-c"><i /> Route</div>
+          <div className="map-node map-node-d"><i /> Complete</div>
+          <span className="map-path path-one" /><span className="map-path path-two" /><span className="map-path path-three" />
+        </div>
+      </section>
 
-      <section className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-6">
-            {workflowPages.map((item) => (
-              <article
-                key={item.slug}
-                className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-300 hover:shadow-sm transition-all flex flex-col"
-              >
-                <div className="bg-gray-50 border-b border-gray-100 overflow-hidden">
-                  <Image
-                    alt={item.name}
-                    src={item.image}
-                    width={520}
-                    height={260}
-                    className="w-full h-auto"
-                  />
+      <section className="workflow-catalogue">
+        <div className="shell-inner">
+          <div className="catalogue-intro">
+            <p className="section-index">01 / EXAMPLE WORKFLOWS</p>
+            <p>These are starting points, not fixed packages. Every system is shaped around the process, tools, and constraints already inside your business.</p>
+          </div>
+          <div className="catalogue-list">
+            {workflowPages.map((item, index) => (
+              <Link className="catalogue-item" href={`/workflows/${item.slug}`} key={item.slug}>
+                <span className="catalogue-number">0{index + 1}</span>
+                <div className="catalogue-title">
+                  <span>{item.eyebrow.replace("Hypothetical ", "")}</span>
+                  <h2>{item.name}</h2>
                 </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <p className="text-xs font-semibold text-indigo-600 tracking-widest uppercase mb-3">
-                    {item.eyebrow}
-                  </p>
-                  <h2 className="text-xl font-bold text-gray-900 mb-3">{item.name}</h2>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-3">{item.summary}</p>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-6">{item.heroText}</p>
-                  <Link
-                    href={`/workflows/${item.slug}`}
-                    className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors"
-                  >
-                    View example <span>→</span>
-                  </Link>
-                </div>
-              </article>
+                <p>{item.summary}</p>
+                <span className="catalogue-arrow" aria-hidden="true">↗</span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
+
+      <section className="fit-section shell-inner">
+        <div>
+          <p className="section-index">02 / WHAT MAKES A GOOD WORKFLOW</p>
+          <h2>Repetitive.<br />Rule-driven.<br /><em>Measurable.</em></h2>
+        </div>
+        <div className="fit-grid">
+          <article><span>01</span><h3>It happens often</h3><p>The task comes back every day, week, or month and consumes reliable chunks of team time.</p></article>
+          <article><span>02</span><h3>It follows a pattern</h3><p>Most cases move through familiar steps, with clear exceptions that can be handed to a person.</p></article>
+          <article><span>03</span><h3>The value is visible</h3><p>Success can be measured in time saved, response speed, reduced errors, or improved conversion.</p></article>
+          <article><span>04</span><h3>The inputs already exist</h3><p>The information lives in tools you already use—even if it is currently fragmented between them.</p></article>
+        </div>
+      </section>
+
+      <div className="shell-inner"><PageCta /></div>
     </main>
   );
 }

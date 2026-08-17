@@ -1,7 +1,7 @@
 export const workflowPages = [
   {
     slug: "lead-capture-agent",
-    eyebrow: "Lead Capture",
+    eyebrow: "Hypothetical Workflow 01",
     name: "Lead Capture Agent",
     summary:
       "Capture enquiries from every source and route them into one clean pipeline.",
@@ -25,7 +25,7 @@ export const workflowPages = [
   },
   {
     slug: "onboarding-ops-agent",
-    eyebrow: "Onboarding & Ops",
+    eyebrow: "Hypothetical Workflow 02",
     name: "Onboarding and Ops Agent",
     summary:
       "Handle onboarding tasks, handoffs, reminders, and status updates without admin chaos.",
@@ -49,7 +49,7 @@ export const workflowPages = [
   },
   {
     slug: "reporting-admin-agent",
-    eyebrow: "Reporting & Admin",
+    eyebrow: "Hypothetical Workflow 03",
     name: "Reporting and Admin Agent",
     summary:
       "Handle recurring reporting, reminders, approvals, and routine admin with less repetition.",
@@ -77,7 +77,7 @@ export const faqs = [
   {
     question: "What kinds of businesses are a good fit for this?",
     answer:
-      "Small businesses with repeatable admin, operational bottlenecks, or manual handoffs are usually a strong fit. That includes letting agencies, service businesses, agencies, trades, and other teams losing hours every week to repetitive work.",
+      "Small businesses with repeatable admin, operational bottlenecks, or manual handoffs are usually a strong fit. That includes service businesses, professional firms, agencies, trades, and other teams losing hours every week to repetitive work.",
   },
   {
     question: "Do we need to replace our current tools?",
