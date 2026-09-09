@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { sendContactEmail } from "../actions/contact";
 
@@ -26,6 +27,10 @@ export default function ContactForm() {
 
   return (
     <form action={formAction} className="grid gap-6">
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="grid md:grid-cols-2 gap-6">
         <div className="grid gap-2">
           <label htmlFor="name" className="text-sm font-medium text-gray-700">
@@ -99,6 +104,12 @@ export default function ContactForm() {
       >
         {isPending ? "Sending…" : "Send message"}
       </button>
+      <p className="text-xs text-gray-500 leading-relaxed">
+        We use your details only to respond to your enquiry. See our{" "}
+        <Link href="/privacy" className="text-indigo-600 hover:text-indigo-800 underline underline-offset-2">
+          privacy notice
+        </Link>.
+      </p>
     </form>
   );
 }

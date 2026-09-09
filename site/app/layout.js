@@ -15,9 +15,25 @@ const interTight = Inter_Tight({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.molyxlabs.com"),
   title: "Molyx Labs | AI Automation for UK Small Businesses",
   description:
     "Molyx Labs builds AI agents and workflow automations for UK small businesses. Reduce admin, improve operations, and save time — starting with a free discovery call.",
+  openGraph: {
+    title: "Molyx Labs | AI Automation for UK Small Businesses",
+    description:
+      "Practical AI agents and workflow automations built around the way your business already works.",
+    url: "/",
+    siteName: "Molyx Labs",
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Molyx Labs | AI Automation for UK Small Businesses",
+    description:
+      "Practical AI agents and workflow automations built around the way your business already works.",
+  },
 };
 
 export default function RootLayout({ children }) {

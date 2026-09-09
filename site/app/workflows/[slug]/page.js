@@ -21,6 +21,9 @@ export async function generateMetadata({ params }) {
   return {
     title: `${page.name} | Molyx Labs`,
     description: page.summary,
+    alternates: {
+      canonical: `/workflows/${page.slug}`,
+    },
   };
 }
 

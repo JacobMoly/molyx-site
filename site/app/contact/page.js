@@ -7,6 +7,9 @@ export const metadata = {
   title: "Contact | Molyx Labs",
   description:
     "Get in touch with Molyx Labs. Tell us about your biggest admin bottleneck and we will explore whether automation can help.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {

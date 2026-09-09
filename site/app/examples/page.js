@@ -4,6 +4,9 @@ export const metadata = {
   title: "Examples | Molyx Labs",
   description:
     "The kind of problems Molyx Labs gets called in for — before and after. Sales, admin, and customer support automation for UK small businesses.",
+  alternates: {
+    canonical: "/examples",
+  },
 };
 
 const calendlyUrl = "https://calendly.com/jacob-molyxlabs/30min";

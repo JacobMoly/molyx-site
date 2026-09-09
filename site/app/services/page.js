@@ -7,7 +7,10 @@ const calendlyUrl = "https://calendly.com/jacob-molyxlabs/30min";
 export const metadata = {
   title: "Services | Molyx Labs",
   description:
-    "Molyx Labs designs and builds AI workflow automations for UK small businesses — lead capture, onboarding, reporting, and more. Discovery-led, founder-run.",
+    "Molyx Labs designs and builds AI workflow automations for UK small businesses — lead capture, onboarding, reporting, and more. Discovery-led and directly delivered.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 const processSteps = [

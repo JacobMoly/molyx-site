@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "What does a typical project cost?",
-    a: "It depends entirely on the problem. Small workflow automations can be a few hundred pounds; larger AI agent builds are scoped properly after discovery. We only recommend work that pays for itself, and we'll tell you if automation isn't the right answer.",
+    a: "It depends on the workflow, systems involved, and expected return. After discovery, you receive a clear fixed proposal covering scope, cost, timing, and support before any work begins. We only recommend a build when there is a credible business case for it.",
   },
   {
     q: "Will this work with the tools we already use?",
@@ -36,11 +36,14 @@ export default function FAQ() {
         const isOpen = open === i;
         return (
           <Reveal key={i} delay={i * 60} translateY={16} duration={600}>
-            <div
-              onClick={() => setOpen(isOpen ? -1 : i)}
-              style={{ borderBottom: '1px solid #ececf2', padding: '24px 4px', cursor: 'pointer' }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20 }}>
+            <div style={{ borderBottom: '1px solid #ececf2', padding: '24px 4px' }}>
+              <button
+                type="button"
+                onClick={() => setOpen(isOpen ? -1 : i)}
+                aria-expanded={isOpen}
+                aria-controls={`faq-answer-${i}`}
+                style={{ width: '100%', border: 0, padding: 0, background: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, cursor: 'pointer', textAlign: 'left' }}
+              >
                 <h3 style={{ fontFamily: tight, fontWeight: 600, fontSize: 18, letterSpacing: '-0.01em', margin: 0, color: '#16161a' }}>
                   {f.q}
                 </h3>
@@ -57,8 +60,9 @@ export default function FAQ() {
                 >
                   +
                 </span>
-              </div>
+              </button>
               <div
+                id={`faq-answer-${i}`}
                 style={{
                   maxHeight: isOpen ? 240 : 0,
                   overflow: 'hidden',

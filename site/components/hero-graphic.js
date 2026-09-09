@@ -1,60 +1,148 @@
-'use client';
-import { useEffect, useRef } from 'react';
+"use client";
+
+import { useEffect, useRef } from "react";
+
+const COLUMN_COUNT = 34;
+const ROW_COUNT = 20;
 
 export default function HeroGraphic() {
-  const ref = useRef(null);
+  const wrapperRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => {
-      if (ref.current) {
-        ref.current.style.transform = `translateY(${window.scrollY * 0.12}px)`;
+    const wrapper = wrapperRef.current;
+    const canvas = canvasRef.current;
+    const context = canvas?.getContext("2d");
+    if (!wrapper || !canvas || !context) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let width = 0;
+    let height = 0;
+    let frameId;
+    let pointerX = 0;
+    let pointerY = 0;
+    let easedPointerX = 0;
+    let easedPointerY = 0;
+
+    const resize = () => {
+      const rect = wrapper.getBoundingClientRect();
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.round(width * pixelRatio);
+      canvas.height = Math.round(height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    };
+
+    const draw = (time = 0) => {
+      context.clearRect(0, 0, width, height);
+
+      const glow = context.createRadialGradient(
+        width * 0.56,
+        height * 0.48,
+        20,
+        width * 0.56,
+        height * 0.48,
+        width * 0.48,
+      );
+      glow.addColorStop(0, "rgba(99, 102, 241, 0.11)");
+      glow.addColorStop(0.55, "rgba(99, 102, 241, 0.035)");
+      glow.addColorStop(1, "rgba(99, 102, 241, 0)");
+      context.fillStyle = glow;
+      context.fillRect(0, 0, width, height);
+
+      easedPointerX += (pointerX - easedPointerX) * 0.035;
+      easedPointerY += (pointerY - easedPointerY) * 0.035;
+
+      const motionTime = reducedMotion.matches ? 0 : time * 0.001;
+      const columns = width < 440 ? 27 : COLUMN_COUNT;
+
+      for (let row = 0; row < ROW_COUNT; row += 1) {
+        const depth = row / (ROW_COUNT - 1);
+        const perspective = 0.72 + depth * 0.4;
+
+        for (let column = 0; column < columns; column += 1) {
+          const across = column / (columns - 1);
+          const normalizedX = across * 2 - 1;
+          const primaryWave = Math.sin(
+            normalizedX * 6.2 + motionTime * 1.25 + depth * 2.8,
+          );
+          const secondaryWave = Math.cos(
+            depth * 5.4 - motionTime * 0.7 + normalizedX * 1.8,
+          );
+          const waveHeight = primaryWave * 20 + secondaryWave * 7;
+          const x =
+            width * 0.5 +
+            normalizedX * width * 0.48 * perspective +
+            (depth - 0.5) * 46 +
+            easedPointerX * (9 + depth * 8);
+          const y =
+            height * 0.15 +
+            depth * height * 0.7 +
+            waveHeight * perspective +
+            easedPointerY * (6 + depth * 7);
+
+          const distanceFromCentre = Math.abs(normalizedX);
+          const edgeFade = Math.max(0, 1 - distanceFromCentre * 0.72);
+          const opacity = (0.12 + depth * 0.44) * edgeFade;
+          const isAccent = (row * 5 + column * 3) % 17 === 0;
+          const radius = (0.8 + depth * 1.35) * (isAccent ? 1.55 : 1);
+
+          context.beginPath();
+          context.arc(x, y, radius, 0, Math.PI * 2);
+          context.fillStyle = isAccent
+            ? `rgba(99, 102, 241, ${Math.min(opacity + 0.25, 0.85)})`
+            : `rgba(22, 22, 26, ${opacity})`;
+          context.fill();
+        }
       }
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    const animate = (time) => {
+      draw(time);
+      if (!reducedMotion.matches) frameId = requestAnimationFrame(animate);
+    };
+
+    const onPointerMove = (event) => {
+      const rect = wrapper.getBoundingClientRect();
+      pointerX = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1));
+      pointerY = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1));
+    };
+
+    const onScroll = () => {
+      wrapper.style.transform = `translateY(${window.scrollY * 0.1}px)`;
+    };
+
+    const restartAnimation = () => {
+      cancelAnimationFrame(frameId);
+      draw();
+      if (!reducedMotion.matches) frameId = requestAnimationFrame(animate);
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      resize();
+      draw();
+    });
+
+    resizeObserver.observe(wrapper);
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    reducedMotion.addEventListener("change", restartAnimation);
+    resize();
+    restartAnimation();
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("scroll", onScroll);
+      reducedMotion.removeEventListener("change", restartAnimation);
+      cancelAnimationFrame(frameId);
+    };
   }, []);
 
   return (
-    <div
-      ref={ref}
-      style={{
-        position: 'absolute',
-        top: 40,
-        right: 32,
-        width: 460,
-        height: 460,
-        pointerEvents: 'none',
-        opacity: 0.9,
-        willChange: 'transform',
-      }}
-    >
-      <svg viewBox="0 0 460 460" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
-        <defs>
-          <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6366f1" stopOpacity="0.14" />
-            <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <circle cx="230" cy="230" r="228" fill="url(#hg)" />
-        <circle cx="230" cy="230" r="150" stroke="#e5e5ee" strokeWidth="1" />
-        <circle cx="230" cy="230" r="100" stroke="#ececf4" strokeWidth="1" />
-        <circle
-          cx="230"
-          cy="230"
-          r="190"
-          stroke="#6366f1"
-          strokeWidth="1"
-          strokeDasharray="2 8"
-          opacity="0.5"
-          style={{ transformOrigin: '230px 230px', animation: 'molyxSpin 40s linear infinite' }}
-        />
-        <path d="M80 230 H180 M230 80 V180 M280 230 H380 M230 280 V380" stroke="#dcdce8" strokeWidth="1" strokeDasharray="4 5" />
-        <circle cx="230" cy="80" r="7" fill="#6366f1" style={{ animation: 'molyxFloat 4s ease-in-out infinite' }} />
-        <circle cx="380" cy="230" r="7" fill="#16161a" style={{ animation: 'molyxFloat 4.5s ease-in-out infinite 0.4s' }} />
-        <circle cx="230" cy="380" r="7" fill="#6366f1" style={{ animation: 'molyxFloat 5s ease-in-out infinite 0.8s' }} />
-        <circle cx="80" cy="230" r="7" fill="#16161a" style={{ animation: 'molyxFloat 4.2s ease-in-out infinite 0.2s' }} />
-        <circle cx="230" cy="230" r="13" fill="#6366f1" />
-      </svg>
+    <div ref={wrapperRef} className="hero-particle-wave" aria-hidden="true">
+      <canvas ref={canvasRef} />
     </div>
   );
 }

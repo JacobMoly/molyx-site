@@ -3,6 +3,12 @@ import Reveal from "../components/reveal";
 import FAQ from "../components/faq";
 import HeroGraphic from "../components/hero-graphic";
 
+export const metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
 const calendlyUrl = "https://calendly.com/jacob-molyxlabs/30min";
 const tight = "var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif";
 
@@ -15,9 +21,9 @@ function Ic({ path, size = 20 }) {
 }
 
 const stats = [
-  { value: "10+", label: "hours saved per week, per workflow" },
-  { value: "2 wks", label: "from discovery to first automation live" },
-  { value: "100%", label: "built on tools you already use" },
+  { value: "30 min", label: "free, no-prep discovery call" },
+  { value: "1 flow", label: "a focused first project before wider automation" },
+  { value: "Clear", label: "scope and cost agreed before any build" },
   { value: "UK", label: "based, responsive, plain-English support" },
 ];
 
@@ -127,7 +133,7 @@ export default function Home() {
 
       {/* STATS STRIP */}
       <section style={{ borderTop: "1px solid #ededf2", borderBottom: "1px solid #ededf2", background: "#fafafb" }}>
-        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "38px 32px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }}>
+        <div className="home-stats-grid" style={{ maxWidth: 1180, margin: "0 auto", padding: "38px 32px", display: "grid", gap: 24 }}>
           {stats.map((s, i) => (
             <Reveal key={s.value} delay={i * 90} style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               <span style={{ fontFamily: tight, fontWeight: 700, fontSize: 38, letterSpacing: "-0.03em", color: "#0e0e14" }}>{s.value}</span>
@@ -145,7 +151,7 @@ export default function Home() {
             Your team is doing work that software should be doing.
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 22 }}>
+        <div className="home-three-grid" style={{ display: "grid", gap: 22 }}>
           {problems.map((p, i) => (
             <Reveal key={p.title} delay={i * 90} style={{ background: "#fff", border: "1px solid #ececf2", borderRadius: 16, padding: 28 }}>
               <div style={{ width: 42, height: 42, borderRadius: 11, background: "linear-gradient(135deg,#eef0ff,#f4f4f8)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18, color: "#6366f1" }}>
@@ -169,7 +175,7 @@ export default function Home() {
             See real pain-point → agent → benefit examples <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
           </Link>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
+        <div className="home-two-grid" style={{ display: "grid", gap: 22 }}>
           {services.map((sv, i) => (
             <Reveal key={sv.title} delay={i * 90} style={{ background: "#fff", border: "1px solid #ececf2", borderRadius: 18, padding: 34, display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -201,7 +207,7 @@ export default function Home() {
               We don't sell you a tool and hope it fits. We learn your business, then build only what moves the needle.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 0 }}>
+          <div className="home-process-grid" style={{ display: "grid", gap: 0 }}>
             {steps.map((st, i) => (
               <Reveal key={st.num} delay={i * 90} style={{ padding: "0 24px 0", borderLeft: "1px solid #26263a", paddingLeft: 24 }}>
                 <span style={{ fontFamily: tight, fontWeight: 700, fontSize: 14, color: "#6366f1", letterSpacing: "0.04em" }}>{st.num}</span>
@@ -213,9 +219,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY MOLYX + TESTIMONIAL */}
+      {/* WHY MOLYX */}
       <section style={{ maxWidth: 1180, margin: "0 auto", padding: "100px 32px 30px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+        <div className="home-why-grid" style={{ display: "grid", gap: 72, alignItems: "center" }}>
           <div>
             <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>Why Molyx</span>
             <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: "clamp(26px,3.5vw,38px)", lineHeight: 1.12, letterSpacing: "-0.03em", margin: "14px 0 22px", color: "#0e0e14" }}>
@@ -238,39 +244,37 @@ export default function Home() {
             </div>
           </div>
 
-          <Reveal style={{ background: "#fafafb", border: "1px solid #ececf2", borderRadius: 20, padding: 38 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 22 }}>
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24">
-                  <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
-                </svg>
-              ))}
-            </div>
-            <p style={{ fontFamily: tight, fontSize: 22, lineHeight: 1.4, letterSpacing: "-0.02em", color: "#16161a", margin: "0 0 26px", fontWeight: 500 }}>
-              "They didn't try to sell us AI. They sat with our team for an afternoon, found the three jobs eating our week, and quietly automated them. We got those hours back."
+          <Reveal style={{ background: "linear-gradient(145deg,#0e0e14,#202033)", border: "1px solid #29293d", borderRadius: 20, padding: 38 }}>
+            <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#a5a5f5" }}>
+              A lower-risk first project
+            </span>
+            <h3 style={{ fontFamily: tight, fontSize: 28, lineHeight: 1.2, letterSpacing: "-0.025em", color: "#fff", margin: "14px 0 12px", fontWeight: 700 }}>
+              Start small. Prove value. Then expand.
+            </h3>
+            <p style={{ fontSize: 15.5, lineHeight: 1.6, color: "#b2b2c0", margin: "0 0 24px" }}>
+              The first build targets one measurable bottleneck, keeps people in control, and is documented clearly before handover.
             </p>
-            <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: tight, fontWeight: 700, fontSize: 16, flexShrink: 0 }}>
-                JM
-              </div>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: 15, color: "#16161a" }}>Operations Lead</div>
-                <div style={{ fontSize: 13.5, color: "#9494a0" }}>Professional services firm · Manchester</div>
-              </div>
+            <div style={{ display: "grid", gap: 11 }}>
+              {["One focused workflow", "A measurable success target", "Human review where it matters", "Documented handover and support"].map((item) => (
+                <div key={item} style={{ display: "flex", alignItems: "center", gap: 10, color: "#ededf5", fontSize: 14.5 }}>
+                  <span style={{ width: 20, height: 20, display: "inline-flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", background: "rgba(99,102,241,0.22)", color: "#b8b8ff", fontSize: 12 }}>✓</span>
+                  {item}
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* HOW WE WORK */}
       <section style={{ maxWidth: 1180, margin: "0 auto", padding: "90px 32px 30px" }}>
         <Reveal style={{ background: "#fafafb", border: "1px solid #ececf2", borderRadius: 22, padding: 48 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>Who's behind it</span>
+          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6366f1" }}>How we work</span>
           <h2 style={{ fontFamily: tight, fontWeight: 700, fontSize: 30, lineHeight: 1.2, letterSpacing: "-0.02em", margin: "12px 0 14px", color: "#0e0e14", maxWidth: 560 }}>
-            Built by people who've done this work, not just sold it.
+            Direct, practical, and accountable.
           </h2>
           <p style={{ fontSize: 16, lineHeight: 1.6, color: "#6a6a74", margin: 0, maxWidth: 620 }}>
-            Molyx Labs is a small, UK-based team focused on one thing: finding the manual work slowing a business down and quietly making it disappear. No account managers, no handoffs — the people on your discovery call are the people who build your automation.
+            Molyx Labs is a UK-based automation studio focused on finding the manual work slowing a business down and making it disappear. You work directly with the people designing and building the system, with a clear scope, visible progress, and no unnecessary handoffs.
           </p>
         </Reveal>
       </section>
@@ -307,10 +311,10 @@ export default function Home() {
                 Book your discovery call <span style={{ fontSize: 18, lineHeight: 1 }}>→</span>
               </a>
               <a
-                href="mailto:hello@molyxlabs.co.uk"
+                href="mailto:info@molyxlabs.com"
                 style={{ display: "inline-flex", alignItems: "center", gap: 9, color: "#fff", fontSize: 16, fontWeight: 600, padding: "16px 22px", borderRadius: 12, textDecoration: "none", border: "1px solid #2e2e42" }}
               >
-                hello@molyxlabs.co.uk
+                info@molyxlabs.com
               </a>
             </div>
           </div>
